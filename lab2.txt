@@ -1,0 +1,208 @@
+KLOCKI
+czy klocek c leży na klocku a
+?-na(c,a).
+
+czy klocek b leży na klocku d
+?-na(b,d).
+
+?-na(X,a).
+
+?-na(c,X).
+używamy ;
+
+czy klocek d leży na jakimś klocku
+na(d,_).
+_ zmienna anonimowa, czy istnieje obiekt, który spełnia jakąś relację
+
+chcemy znalezc klocek, ktory spelnia oba warunki
+na(X,a),na(X,b)
+
+, - koniunkcja
+
+
+
+Predykat POD
+pod(X,Y) - klocek X leży bezpośrednio pod klockiem Y.
+
+
+pod(X,Y):-na(Y,X)
+jeżeli klocek Y leży na klocku X to wtedy klocek X leży pod klockiem Y
+
+czy klocek a leży pod klockiem c
+pod(a,c).
+
+pod(X,c).
+X=a;
+X=b.
+
+pod jakim klockiem leży klocek c
+pod(c,X).
+X=d.
+
+czy klocek d leży pod jakimś klockiem
+pod(d,_).
+false.
+w oparciu o ten program nie da sie udowodnic czy klocek d lezy pod jakims klockiem
+
+PREDYKAT miedzy
+miedzy(X,Y,Z) - klocek X lezy miedzy klockami Y i Z.
+miedzy(X,Y,Z):-na(X,Y),pod(X,Z).
+miedzy(X,Y,Z):-na(X,Z),pod(X,Y).
+
+czy klocek c lezy miedzy klockami a i d.
+miedzy(c,a,d).
+true; - udało się udowodnić
+false - innej odpowiedzi nie znaleziono
+
+czy klocek b leży miedzy klockami a i d.
+miedzy(b,a,d).
+false.
+w oparciu o nasz program nie da się tego udowodnić
+
+jaki klocek leży miedzy klockami a i d.
+miedzy(X,a,d).
+X = c;
+false. - innej odpowiedzi juz nie znaleziono.
+
+miedzy jakimi klockami lezy klocek c
+miedzy(c,Y,Z).
+miedzy(c,X,Y). zmienne obojetnie 
+X=a,
+Y=d;
+X=b,
+Y=d;
+X=d,
+Y=a;
+X=d,
+Y=b.
+
+czy klocek a leży miedzy jakimis klockami
+miedzy(a,_,_).
+
+kolos - przykladowe cele dla programy
+1) z ilu klauzul 
+program sklada sie z 6 klauzul
+2) definicje relacji
+3 (pod/2, na/2, miedzy/3)
+3)
+fakty: 3 pierwsze
+reguły:3 ostatnie
+
+Program składa się z 6 klauzul.
+Program zawiera 3 definicje relacji.
+saą to relacje na/2, pod/2, miedzy/3.
+Definicja relacji na/2 składa się z 3 klauzul, które sa faktami.
+Definicja relacji pod/2 sklada sie z 1 klauzuli, ktora jest regula
+definicja relacji miedzy/3 sklada sie z 2 klauzul,  ktore sa regulami.
+
+
+Zad4
+jarosz(X) - X jest jaroszem
+niepali(X) - X nie pali
+czyta(X) - X lubi czytać
+sport(X) - X uprawia sport
+lubi(X,Y) - X lubi Y
+
+fakty:
+jarosz(ola).
+jarosz(ewa).
+jarosz(jan).
+jarosz(paweł).
+
+nie_pali(ola).
+nie_pali(ewa).
+nie_pali(jan).
+
+czyta(ola).
+czyta(iza).
+czyta(piotr).
+
+sport(ola).
+sport(jan).
+sport(piotr).
+sport(pawel).
+
+KLAUZULE
+1)
+lubi(ola,Y):-jarosz(Y),sport(Y).
+jeżeli Y uprawia sport i y jest jaroszem to wtedy zachodzi reguła ola go lubi.
+2)
+lubi(ewa,Y):-jarosz(Y),nie_pali(Y).
+to samo
+lubi(ewa,Y):-nie_pali(Y),-jarosz(Y).
+3)
+lubi(iza,Y):-czyta(Y).
+lubi(iza,Y):-sport(Y),nie_pali(Y).
+4)
+lubi(jan,Y):-sport(Y).
+5)
+lubi(piotr,Y):-czyta(Y).
+lubi(piotr,Y):-sport(Y),jarosz(Y).
+6)
+lubi(paweł,Y):-jarosz(Y),sport(Y),czyta(Y).
+
+definicje, relacji:
+jarosz, niepali, czyta, sport, lubi
+
+lubi(X,Y),lubi(Y,X).
+w tym np. X, Y = Ola.
+X\==Y.
+nowy cel:
+lubi(X,Y),lubi(Y,X),X\==Y.
+
+
+kogo lubi Ola
+lubi(ola,X),X\==ola.
+kogo lubi jednoczesnie iza i ola.
+lubi(ola,X),lubi(iza,X).
+
+czy ktos lubi ize.
+lubi(_,iza).
+true;
+true;
+false.
+
+
+ZADANIE1
+lubi(jan,tatry).
+lubi(jan,beskidy).
+lubi(jerzy,beskidy).
+lubi(jerzy,bieszczady).
+lubi(adam, sudety).
+lubi(justyna, bieszczady).
+bratnia_dusza(X,Y):-lubi(X,G),lubi(Y,G),X\==Y.
+
+A)określ:
+ile klauzul wystepuje w nasisanym programie:
+7
+b)
+które klauzule są faktami a które regułami.
+fakty: 6
+reguła: 1 (ostatnia)
+c)
+w przypadku reguł podaj głowe i predykaty stanowiące ciało reguły.
+głowa: bratnia_dusza(X,Y)
+ciało: lubi(X,G),lubi(Y,G),X\==Y.
+d)
+z ilu definicji (predykatów) składa się program; podaj
+definicje relacji: 2 (lubi, bratnia_dusza)
+
+B)
+1)
+lubi(jerzy,sudety).
+2)
+lubi(jan,X);
+X=tatry;
+X=beskidy.
+3)
+lubi(X,bieszczdy);
+4)
+bratnia_dusza(jan,_);
+5)
+bratnia_dusza(justyna,X);
+6)
+bratnia_dusza(X,Y);
+
+kto lubi jednoczesnie tatry i beskidy
+lubi(X,tatry),
+lubi(x,beskidy).
