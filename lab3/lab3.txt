@@ -1,0 +1,40 @@
+fn(a,X,f(g(Y)))
+fn(V,h(Z,V), f(V))
+
+1) czy jest taki sam funktor
+Tak, fu
+2) czy tyle samo argumentów
+tak 3.
+3) porównujemy czy mozemy argumenty ze soba uzgodnic
+pierwszy argument
+V=a
+PRZEPISUJEMY
+fn(a,X,f(g(Y)))
+fu(a,h(Z,a),f(a))
+X=h(Z,a)
+fu(a,h(Z,a),f(g(Y)))
+g(Y) i a nie da się uzgodnić
+fu(a,h(Z,a),f(a))
+Tego termu nie da się uzgodnić
+W prologu:
+?=fn(a,X,f(g(Y)))=fn(V,h(Z,V), f(V)).
+
+PRZYKŁAD2
+fu(a,X,f(g(Y))) fu(Y,f(Z),f(Z))
+Y=a
+fu(a,X,F(g(a))) fu(a,f(Z),f(Z))
+X=f(Z)
+fu(a,f(Z),F(g(a))) fu(a,f(Z),f(Z))
+Z=g(a)
+fu(a,f(g(a)),f(g(a)))) fu(a,f(g(a)),f(g(a)))
+termy da się uzgodnić
+
+PRZYKŁAD3
+fu(f(X),Y,a) fu(f(g(Y)),c,Z)
+X=g(Y)
+fu(f(g(Y)),Y,a) fu(f(g(Y)),c,Z)
+Y=c
+fu(f(g(Y)),c,a) fu(f(g(Y)),c,Z)
+a=Z
+fu(f(g(Y)),c,Z) fu(f(g(Y)),c,a)
+
